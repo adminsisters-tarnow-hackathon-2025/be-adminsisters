@@ -1,8 +1,9 @@
-using AdminSisters.Api.Controllers;
+using AdminSisters.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.RegisterDbContext(builder.Configuration);
 builder.Services.AddDependencyInjection();
 
 builder.Services.AddControllers();

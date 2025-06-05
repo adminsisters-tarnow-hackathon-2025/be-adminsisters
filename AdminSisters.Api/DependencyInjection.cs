@@ -1,6 +1,9 @@
-﻿using System.Reflection;
+﻿using AdminSisters.Api.Common.Interfaces;
+using AdminSisters.Api.Persistence;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
-namespace AdminSisters.Api.Controllers;
+namespace AdminSisters.Api;
 
 public static class DependencyInjection
 {
@@ -18,6 +21,15 @@ public static class DependencyInjection
                 });
         });
 
+        return services;
+    }
+    public static IServiceCollection RegisterDbContext(this IServiceCollection services, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("Main");
+        services.AddDbContext<IRepository, MainDbContext>(options =>
+        {
+            options.UseNpgsql(connectionString);
+        });
         return services;
     }
 }
