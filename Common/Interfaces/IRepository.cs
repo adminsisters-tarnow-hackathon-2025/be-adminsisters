@@ -8,6 +8,7 @@ public interface IRepository
     public DbSet<Location> Locations { get; }
     public DbSet<Event> Events { get; }
     public DbSet<User> Users  { get; }
+    public DbSet<Achievement>  Achievements { get; }
     int SaveChanges();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

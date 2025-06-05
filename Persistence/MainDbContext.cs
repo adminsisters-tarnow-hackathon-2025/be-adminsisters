@@ -10,6 +10,8 @@ public class MainDbContext(DbContextOptions<MainDbContext> options) : DbContext(
     public DbSet<Location> Locations => Set<Location>();
     public DbSet<Event> Events => Set<Event>();
     public DbSet<User> Users => Set<User>();
+    public DbSet<Achievement> Achievements => Set<Achievement>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

@@ -10,8 +10,9 @@ public class User
     public string Name { get; private set; } = string.Empty;
     public string Password { get; private set; } = string.Empty;
     public int CoinAmount { get; private set; }
-    
+
     public List<UserEvent>? UserEvents { get; init; }
+    public List<UserAchievement>? UserAchievements { get; init; }
 
     public static User Create(
         string name,
@@ -40,4 +41,6 @@ public class User
 
         CoinAmount -= amount;
     }
+    
+    
 }
