@@ -16,9 +16,11 @@ public class LocationsController(IMediator mediator) : ControllerBase
         return Ok(locationId);
     }
 
-    [HttpPut]
-    public async Task<IActionResult> UpdateLocation([FromBody] UpdateLocationCommand command)
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> UpdateLocation(Guid id, [FromBody] UpdateLocationOptions updateLocationOptions)
     {
+        var command = new UpdateLocationCommand(id, updateLocationOptions);
+
         var locationId = await mediator.Send(command);
         return Ok(locationId);
     }
