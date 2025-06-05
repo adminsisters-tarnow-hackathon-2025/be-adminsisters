@@ -7,10 +7,10 @@ public class Location
     }
 
     public Guid Id { get; init; }
-    public string Name { get; private set; } = string.Empty;
-    public string Address { get; private set; } = string.Empty;
-    public double Longitude { get; private set; }
-    public double Latitude { get; private set; }
+    public string Name { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+    public double Longitude { get; set; }
+    public double Latitude { get; set; }
 
     public List<Event> Events { get; init; } = [];
 
