@@ -1,7 +1,12 @@
-﻿using AdminSisters.Api.Common.Interfaces;
+﻿using System.Reflection;
+using AdminSisters.Api.Common.Extensions;
+using AdminSisters.Api.Common.Interfaces;
 using AdminSisters.Api.Persistence;
+using AdminSisters.Api.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+using Npgsql;
+using System.Text.Json;
+
 
 namespace AdminSisters.Api;
 
@@ -23,13 +28,34 @@ public static class DependencyInjection
 
         return services;
     }
+
     public static IServiceCollection RegisterDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Main");
-        services.AddDbContext<IRepository, MainDbContext>(options =>
+        var portalConnectionString = configuration.GetConnectionString("Portal");
+
+        var dataSourceBuilder = new NpgsqlDataSourceBuilder(portalConnectionString);
+        dataSourceBuilder.EnableDynamicJson();
+        var dataSource = dataSourceBuilder.Build();
+
+        services.AddDbContext<MainDbContext>(options =>
         {
-            options.UseNpgsql(connectionString);
+            options.UseNpgsql(dataSource, npgsqlOptions =>
+            {
+                npgsqlOptions.MigrationsHistoryTable("ab_history_migrations");
+                npgsqlOptions.UseJsonDocumentDbApi();
+            });
+            options.UseSnakeCaseNamingConvention();
+
+            options.ReplaceService<IJsonValueReaderWriterSource, CustomJsonValueReaderWriterSource>();
+            var environment = configuration.GetValue<string>("Environment") ??
+                              Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            if (environment?.Equals("Development", StringComparison.OrdinalIgnoreCase) == true)
+            {
+                options.EnableSensitiveDataLogging();
+            }
         });
+
+        services.AddScoped<IRepository>(provider => provider.GetRequiredService<MainDbContext>());
         return services;
     }
 }
