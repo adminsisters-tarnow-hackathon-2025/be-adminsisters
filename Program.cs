@@ -6,7 +6,7 @@ public static class Program
     {
 
         var builder = WebApplication.CreateBuilder(args);
-
+        
         builder.Services.RegisterDbContext(builder.Configuration);
         builder.Services.AddDependencyInjection();
 
@@ -14,6 +14,7 @@ public static class Program
 
         var app = builder.Build();
 
+        app.ApplyMigrations();
         app.UseAuthorization();
 
         app.MapControllers();

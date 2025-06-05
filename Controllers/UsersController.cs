@@ -28,7 +28,7 @@ public class UsersController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
     {
         var userId = await mediator.Send(command);
-        return CreatedAtAction(nameof(GetUser), new { id = userId }, null);
+        return Ok(userId);
     }
 
     [HttpDelete("{id:guid}")]

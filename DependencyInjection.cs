@@ -56,4 +56,17 @@ public static class DependencyInjection
         services.AddScoped<IRepository>(provider => provider.GetRequiredService<MainDbContext>());
         return services;
     }
+    
+    public static WebApplication ApplyMigrations(this WebApplication webApplication)
+    {
+        using var scope = webApplication.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<MainDbContext>();
+        if (db.Database.GetPendingMigrations().Any())
+        {
+            db.Database.Migrate();
+        }
+
+        return webApplication;
+    }
+
 }
