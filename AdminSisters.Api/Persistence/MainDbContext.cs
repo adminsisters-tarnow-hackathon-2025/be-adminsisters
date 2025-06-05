@@ -7,8 +7,8 @@ namespace AdminSisters.Api.Persistence;
 
 public class MainDbContext(DbContextOptions<MainDbContext> options) : DbContext(options), IRepository
 {
-    public DbSet<Location> Locations { get; set; }
-    public DbSet<Event> Events { get; set; }
+    public DbSet<Location> Locations => Set<Location>();
+    public DbSet<Event> Events => Set<Event>();
     public DbSet<User> Users => Set<User>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
