@@ -1,3 +1,4 @@
+using be_adminsisters.UseCases.Users.Commands.AddCoinToUser;
 using be_adminsisters.UseCases.Users.Commands.CreateUser;
 using be_adminsisters.UseCases.Users.Commands.DeleteUser;
 using be_adminsisters.UseCases.Users.Commands.LoginUser;
@@ -30,6 +31,14 @@ public class UsersController(IMediator mediator) : ControllerBase
     {
         var userId = await mediator.Send(command);
         return Ok(userId);
+    }
+
+    [HttpPost("{id:guid}/add-coin")]
+    public async Task<IActionResult> AddCoinToUser(Guid id, [FromBody] AddCoinToUserOptions options)
+    {
+        var command = new AddCoinToUserCommand(id, options);
+        var newCoinBalance = await mediator.Send(command);
+        return Ok(newCoinBalance);
     }
 
     [HttpPost]
