@@ -1,6 +1,7 @@
 ﻿using be_adminsisters.UseCases.Locations.Commands.CreateLocation;
 using be_adminsisters.UseCases.Locations.Commands.DeleteLocation;
 using be_adminsisters.UseCases.Locations.Commands.UpdateLocation;
+using be_adminsisters.UseCases.Locations.Queries.GetLocations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,13 @@ namespace be_adminsisters.Controllers;
 [Route("api/locations")]
 public class LocationsController(IMediator mediator) : ControllerBase
 {
+    [HttpGet]
+    public async Task<IActionResult> GetLocations()
+    {
+        var users = await mediator.Send(new GetLocationsQuery());
+        return Ok(users);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateLocation([FromBody] CreateLocationCommand command)
     {
