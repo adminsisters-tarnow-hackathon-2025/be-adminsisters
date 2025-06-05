@@ -1,23 +1,20 @@
-using AdminSisters.Api.UseCases.Users.Commands.CreateUser;
-
 namespace AdminSisters.Api.Persistence.Entities;
 
 public class User
 {
+    private User()
+    {
+    }
+
     public Guid Id { get; init; }
     public string Name { get; private set; } = string.Empty;
     public string Password { get; private set; } = string.Empty;
     public int CoinAmount { get; private set; }
 
-    private User()
-    {
-        
-    }
-
     public static User Create(
         string name,
         string password
-        )
+    )
     {
         return new User()
         {
@@ -25,7 +22,7 @@ public class User
             Password = password
         };
     }
-    
+
     public void AddCoin(int amount)
     {
         if (amount <= 0)
@@ -41,5 +38,4 @@ public class User
 
         CoinAmount -= amount;
     }
-
 }
