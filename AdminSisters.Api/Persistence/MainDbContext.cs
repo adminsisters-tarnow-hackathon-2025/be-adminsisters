@@ -1,14 +1,15 @@
 ﻿using AdminSisters.Api.Common.Interfaces;
+using AdminSisters.Api.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using AdminSisters.Api.Persistence.Entities;
 
 namespace AdminSisters.Api.Persistence;
 
 public class MainDbContext(DbContextOptions<MainDbContext> options) : DbContext(options), IRepository
 {
+    public DbSet<Location> Locations { get; set; }
+    public DbSet<Event> Events { get; set; }
     public DbSet<User> Users => Set<User>();
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
