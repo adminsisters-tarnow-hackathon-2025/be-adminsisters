@@ -11,7 +11,7 @@ public class GetUserHandler(IRepository repository) : IRequestHandler<GetUserQue
     public async Task<ResponseWrapper<UserDto>> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
         var user = await repository.Users.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken) 
-            ?? throw new KeyNotFoundException("Nie znaleziono podanego użytkownika!");;
+            ?? throw new KeyNotFoundException("Nie znaleziono podanego użytkownika!");
         return new ResponseWrapper<UserDto>{ Data = new UserDto(user) };
     }
 }
