@@ -3,17 +3,17 @@
 public class Event
 {
     public Guid Id { get; init; }
-    public string Name { get; private set; } = string.Empty;
-    public string ShortDescription { get; private set; } = string.Empty;
-    public string LongDescription { get; private set; } = string.Empty;
-    public decimal Price { get; private set; }
-    public int CoinReward { get; private set; }
-    public byte[] Image { get; private set; } = [];
-    public string Type { get; private set; } = string.Empty;
-    public List<string> Tags { get; private set; } = [];
-    public DateTime DateFrom { get; private set; }
-    public DateTime DateTo { get; private set; }
-    public Guid LocationId { get; private set; }
+    public string Name { get; set; } = string.Empty;
+    public string ShortDescription { get; set; } = string.Empty;
+    public string LongDescription { get; set; } = string.Empty;
+    public decimal Price { get; set; }
+    public int CoinReward { get; set; }
+    public byte[] Image { get; set; } = [];
+    public string Type { get; set; } = string.Empty;
+    public List<string> Tags { get; set; } = [];
+    public DateTime DateFrom { get; set; }
+    public DateTime DateTo { get; set; }
+    public Guid LocationId { get; set; }
     public Location? Location { get; init; }
 
     public static Event Create(
