@@ -11,7 +11,7 @@ public class CreateUserHandler(IRepository repository) : IRequestHandler<CreateU
     {
         var user = User.Create(request.Name,request.Password);
         
-        repository.Users.Add(user);
+        await repository.Users.AddAsync(user, cancellationToken);
         await repository.SaveChangesAsync(cancellationToken);
         
         return new ResponseWrapper<Guid>(){ Data = user.Id};
