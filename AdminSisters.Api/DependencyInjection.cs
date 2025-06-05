@@ -31,7 +31,7 @@ public static class DependencyInjection
 
     public static IServiceCollection RegisterDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        var portalConnectionString = configuration.GetConnectionString("Portal");
+        var portalConnectionString = configuration.GetConnectionString("Main");
 
         var dataSourceBuilder = new NpgsqlDataSourceBuilder(portalConnectionString);
         dataSourceBuilder.EnableDynamicJson();
@@ -41,7 +41,7 @@ public static class DependencyInjection
         {
             options.UseNpgsql(dataSource, npgsqlOptions =>
             {
-                npgsqlOptions.MigrationsHistoryTable("ab_history_migrations");
+                npgsqlOptions.MigrationsHistoryTable("as_history_migrations");
                 npgsqlOptions.UseJsonDocumentDbApi();
             });
             options.UseSnakeCaseNamingConvention();
