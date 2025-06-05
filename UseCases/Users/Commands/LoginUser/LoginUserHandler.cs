@@ -1,17 +1,18 @@
 using be_adminsisters.Common.Interfaces;
+using be_adminsisters.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace be_adminsisters.UseCases.Users.Commands.LoginUser;
 
-public class LoginUserHandler(IRepository repository) : IRequestHandler<LoginUserCommand>
+public class LoginUserHandler(IRepository repository) : IRequestHandler<LoginUserCommand, ResponseWrapper<Guid>>
 {
-    public async Task Handle(LoginUserCommand request, CancellationToken cancellationToken)
+    public async Task<ResponseWrapper<Guid>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
-        var isExist = await repository.Users.AnyAsync(x => x.Name == request.Name && x.Password == request.Password,
-            cancellationToken);
+        var user = await repository.Users
+            .FirstOrDefaultAsync(x => x.Name == request.Name, cancellationToken)
+            ?? throw new KeyNotFoundException("Nieprawidłowe dane logowania!");
 
-        if (!isExist)
-            throw new KeyNotFoundException("Nie znaleziono podanego użytkownika lub hasło jest nieprawidłowe!");
+        return new ResponseWrapper<Guid>() { Data = user.Id };
     }
 }

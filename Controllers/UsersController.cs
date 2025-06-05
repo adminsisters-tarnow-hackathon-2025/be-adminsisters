@@ -1,5 +1,6 @@
 using be_adminsisters.UseCases.Users.Commands.CreateUser;
 using be_adminsisters.UseCases.Users.Commands.DeleteUser;
+using be_adminsisters.UseCases.Users.Commands.LoginUser;
 using be_adminsisters.UseCases.Users.Queries.GetUser;
 using be_adminsisters.UseCases.Users.Queries.GetUsers;
 using MediatR;
@@ -26,6 +27,13 @@ public class UsersController(IMediator mediator) : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
+    {
+        var userId = await mediator.Send(command);
+        return Ok(userId);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> LoginUser([FromBody] LoginUserCommand command)
     {
         var userId = await mediator.Send(command);
         return Ok(userId);
