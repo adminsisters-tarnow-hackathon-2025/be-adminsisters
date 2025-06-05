@@ -1,6 +1,6 @@
 namespace be_adminsisters;
 
-public class Program
+public static class Program
 {
     public static void Main(string[] args)
     {
