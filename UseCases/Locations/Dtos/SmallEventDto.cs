@@ -6,4 +6,6 @@ public class SmallEventDto(Event eventEntity)
 {
     public Guid Id { get; } = eventEntity.Id;
     public string Name { get; } = eventEntity.Name;
+    public DateTime DateFrom { get; } = eventEntity.DateFrom;
+    public DateTime DateTo { get; } = eventEntity.DateTo;
 }
