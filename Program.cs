@@ -13,6 +13,7 @@ public static class Program
         builder.Services.AddControllers();
 
         var app = builder.Build();
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
 
         app.ApplyMigrations();
         app.UseAuthorization();
