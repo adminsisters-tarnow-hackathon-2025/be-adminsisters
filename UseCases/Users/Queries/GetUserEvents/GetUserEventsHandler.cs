@@ -14,8 +14,9 @@ namespace be_adminsisters.UseCases.Users.Queries.GetUserEvents
             var user = await repository.Users
                 .Include(x => x.UserEvents)!
                 .ThenInclude(x => x.Event)
-            .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken)
-            ?? throw new KeyNotFoundException("Nie znaleziono podanego użytkownika!");
+                .ThenInclude(x => x.Location)
+                .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken)
+                ?? throw new KeyNotFoundException("Nie znaleziono podanego użytkownika!");
 
             var eventDtos = user.UserEvents!
                 .Select(ue => new EventDto(ue.Event!))
