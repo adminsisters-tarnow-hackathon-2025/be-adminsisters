@@ -37,8 +37,8 @@ public class Event
             CoinReward = coinReward,
             Type = type,
             Tags = tags,
-            DateFrom = dateFrom,
-            DateTo = dateTo,
+            DateFrom = dateFrom.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(dateFrom, DateTimeKind.Utc) : dateFrom.ToUniversalTime(),
+            DateTo = dateTo.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(dateTo, DateTimeKind.Utc) : dateTo.ToUniversalTime(),
             LocationId = locationId
         };
     }
