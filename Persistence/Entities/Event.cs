@@ -8,7 +8,6 @@ public class Event
     public string LongDescription { get; set; } = string.Empty;
     public decimal Price { get; set; }
     public int CoinReward { get; set; }
-    public byte[] Image { get; set; } = [];
     public string Type { get; set; } = string.Empty;
     public List<string> Tags { get; set; } = [];
     public DateTime DateFrom { get; set; }
@@ -22,7 +21,6 @@ public class Event
         string longDescription,
         decimal price,
         int coinReward,
-        byte[] image,
         DateTime dateFrom,
         DateTime dateTo,
         Guid locationId
@@ -35,7 +33,6 @@ public class Event
             LongDescription = longDescription,
             Price = price,
             CoinReward = coinReward,
-            Image = image,
             DateFrom = dateFrom,
             DateTo = dateTo,
             LocationId = locationId

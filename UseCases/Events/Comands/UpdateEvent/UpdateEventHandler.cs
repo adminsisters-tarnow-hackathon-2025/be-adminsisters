@@ -16,7 +16,6 @@ public class UpdateEventHandler(IRepository repository) : IRequestHandler<Update
         eventEntity.LongDescription = request.Options.LongDescription ?? eventEntity.LongDescription;
         eventEntity.Price = request.Options.Price ?? eventEntity.Price;
         eventEntity.CoinReward = request.Options.CoinReward ?? eventEntity.CoinReward;
-        eventEntity.Image = request.Options.Image ?? eventEntity.Image;
         eventEntity.Type = request.Options.Type ?? eventEntity.Type;
         eventEntity.Tags = request.Options.Tags ?? eventEntity.Tags;
         eventEntity.DateFrom = request.Options.DateFrom ?? eventEntity.DateFrom;

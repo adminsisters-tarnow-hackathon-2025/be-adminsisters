@@ -15,7 +15,6 @@ public class CreateEventHandler(IRepository repository) : IRequestHandler<Create
             request.LongDescription,
             request.Price,
             request.CoinReward,
-            request.Image,
             request.DateFrom,
             request.DateTo,
             request.LocationId

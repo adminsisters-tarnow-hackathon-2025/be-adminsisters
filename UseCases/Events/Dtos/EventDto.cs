@@ -10,7 +10,6 @@ public class EventDto(Event eventEntity)
     public string LongDescription { get; set; } = eventEntity.LongDescription;
     public decimal Price { get; set; } = eventEntity.Price;
     public int CoinReward { get; set; } = eventEntity.CoinReward;
-    public byte[] Image { get; set; } = eventEntity.Image;
     public DateTime DateFrom { get; set; } = eventEntity.DateFrom;
     public DateTime DateTo { get; set; } = eventEntity.DateTo;
     public Guid LocationId { get; set; } = eventEntity.LocationId;
