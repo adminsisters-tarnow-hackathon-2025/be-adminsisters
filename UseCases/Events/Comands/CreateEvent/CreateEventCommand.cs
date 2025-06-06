@@ -9,7 +9,6 @@ public record CreateEventCommand(
     string LongDescription,
     decimal Price,
     int CoinReward,
-    byte[] Image,
     string Type,
     List<string> Tags,
     DateTime DateFrom,

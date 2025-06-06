@@ -19,8 +19,10 @@ public class Event
         string name,
         string shortDescription,
         string longDescription,
+        string type,
         decimal price,
         int coinReward,
+        List<string> tags,
         DateTime dateFrom,
         DateTime dateTo,
         Guid locationId
@@ -33,6 +35,8 @@ public class Event
             LongDescription = longDescription,
             Price = price,
             CoinReward = coinReward,
+            Type = type,
+            Tags = tags,
             DateFrom = dateFrom,
             DateTo = dateTo,
             LocationId = locationId

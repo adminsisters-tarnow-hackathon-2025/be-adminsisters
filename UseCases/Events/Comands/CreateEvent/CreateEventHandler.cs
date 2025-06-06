@@ -13,8 +13,10 @@ public class CreateEventHandler(IRepository repository) : IRequestHandler<Create
             request.Name,
             request.ShortDescription,
             request.LongDescription,
+            request.Type,
             request.Price,
             request.CoinReward,
+            request.Tags,
             request.DateFrom,
             request.DateTo,
             request.LocationId
