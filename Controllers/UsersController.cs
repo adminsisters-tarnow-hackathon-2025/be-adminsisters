@@ -2,6 +2,7 @@ using be_adminsisters.UseCases.Users.Commands.AddCoinToUser;
 using be_adminsisters.UseCases.Users.Commands.CreateUser;
 using be_adminsisters.UseCases.Users.Commands.DeleteUser;
 using be_adminsisters.UseCases.Users.Commands.LoginUser;
+using be_adminsisters.UseCases.Users.Commands.SubtractionCoinToUser;
 using be_adminsisters.UseCases.Users.Queries.GetUser;
 using be_adminsisters.UseCases.Users.Queries.GetUsers;
 using MediatR;
@@ -37,6 +38,14 @@ public class UsersController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> AddCoinToUser(Guid id, [FromBody] AddCoinToUserOptions options)
     {
         var command = new AddCoinToUserCommand(id, options);
+        var newCoinBalance = await mediator.Send(command);
+        return Ok(newCoinBalance);
+    }
+    
+    [HttpPost("{id:guid}/subtraction-coin")]
+    public async Task<IActionResult> RemoveCoinToUser(Guid id, [FromBody] RemoveCoinToUserOptions options)
+    {
+        var command = new SubtractionCoinToUserCommand(id, options);
         var newCoinBalance = await mediator.Send(command);
         return Ok(newCoinBalance);
     }
