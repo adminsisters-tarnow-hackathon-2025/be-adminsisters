@@ -11,13 +11,6 @@ public class CreateEventHandler(IRepository repository) : IRequestHandler<Create
     {
         try
         {
-            // Validate required fields
-            if (string.IsNullOrEmpty(request.Name))
-                throw new ArgumentException("Name is required");
-            
-            if (request.LocationId == Guid.Empty)
-                throw new ArgumentException("Valid LocationId is required");
-
             var eventEntity = Event.Create(
                 request.Name,
                 request.ShortDescription,
@@ -39,10 +32,7 @@ public class CreateEventHandler(IRepository repository) : IRequestHandler<Create
         }
         catch (Exception ex)
         {
-            return new ResponseWrapper<Guid> 
-            { 
-                Data = Guid.Empty,
-            };
+            throw new Exception(ex.Message); 
         }
     }
 }
