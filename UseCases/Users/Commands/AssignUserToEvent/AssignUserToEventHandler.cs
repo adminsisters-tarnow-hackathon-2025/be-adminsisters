@@ -18,6 +18,11 @@ public class AssignUserToEventHandler(IRepository repository) : IRequestHandler<
             .FirstOrDefaultAsync(x => x.Id == request.EventId, cancellationToken)
             ?? throw new KeyNotFoundException("Nie znaleziono podanego wydarzenia!");
 
+        if (user.UserEvents?.Any(ue => ue.EventId == request.EventId) == true)
+        {
+            throw new InvalidOperationException("Użytkownik jest już przypisany do tego wydarzenia!");
+        }
+
         var userEvent = new UserEvent
         {
             UserId = user.Id,
