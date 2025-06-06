@@ -12,7 +12,7 @@ public class Event
     public List<string> Tags { get; set; } = [];
     public DateTime DateFrom { get; set; }
     public DateTime DateTo { get; set; }
-    public byte[] Image { get; set; }
+    public string Image { get; set; } = string.Empty;
     public Guid LocationId { get; set; }
     public Location? Location { get; init; }
 
@@ -26,7 +26,7 @@ public class Event
         List<string> tags,
         DateTime dateFrom,
         DateTime dateTo,
-        byte[] image,
+        string image,
         Guid locationId
     )
     {
