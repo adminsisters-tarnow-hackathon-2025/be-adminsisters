@@ -2,6 +2,7 @@
 using be_adminsisters.UseCases.Locations.Commands.DeleteLocation;
 using be_adminsisters.UseCases.Locations.Commands.UpdateLocation;
 using be_adminsisters.UseCases.Locations.Queries.GetLocations;
+using be_adminsisters.UseCases.Locations.Queries.GetLocationsWithEvents;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,13 @@ public class LocationsController(IMediator mediator) : ControllerBase
     {
         var users = await mediator.Send(new GetLocationsQuery());
         return Ok(users);
+    }
+    
+    [HttpGet("events")]
+    public async Task<IActionResult> GetLocationsWithEvents()
+    {
+        var locations = await mediator.Send(new GetLocationsWithEventsQuery());
+        return Ok(locations);
     }
 
     [HttpPost]
