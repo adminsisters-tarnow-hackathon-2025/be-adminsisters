@@ -10,6 +10,7 @@ public class AssignUserToEventHandler(IRepository repository) : IRequestHandler<
     public async Task Handle(AssignUserToEventCommand request, CancellationToken cancellationToken)
     {
         var user = await repository.Users
+                       .Include(x => x.UserEvents)
             .FirstOrDefaultAsync(x => x.Id == request.UserId, cancellationToken)
             ?? throw new KeyNotFoundException("Nie znaleziono podanego użytkownika!");
 
