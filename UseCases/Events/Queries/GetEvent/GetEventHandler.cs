@@ -11,9 +11,10 @@ public class GetEventHandler(IRepository repository) : IRequestHandler<GetEventQ
     public async Task<ResponseWrapper<EventDto>> Handle(GetEventQuery request, CancellationToken cancellationToken)
     {
         var eventEntity = await repository.Events
-            .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken)
-            ?? throw new KeyNotFoundException($"Nie znaleziono podanego wydarzenia!");
-        
+                              .Include(x => x.Location)
+                              .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken)
+                          ?? throw new KeyNotFoundException($"Nie znaleziono podanego wydarzenia!");
+
         return new ResponseWrapper<EventDto>() { Data = new EventDto(eventEntity) };
     }
 }

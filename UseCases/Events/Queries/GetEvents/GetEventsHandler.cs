@@ -6,12 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace be_adminsisters.UseCases.Events.Queries.GetEvents;
 
-public class GetEventsHandler(IRepository repository) : IRequestHandler<GetEventsQuery, ResponseWrapper<IEnumerable<EventDto>>>
+public class GetEventsHandler(IRepository repository)
+    : IRequestHandler<GetEventsQuery, ResponseWrapper<IEnumerable<EventDto>>>
 {
-    public async Task<ResponseWrapper<IEnumerable<EventDto>>> Handle(GetEventsQuery request, CancellationToken cancellationToken)
+    public async Task<ResponseWrapper<IEnumerable<EventDto>>> Handle(GetEventsQuery request,
+        CancellationToken cancellationToken)
     {
-        var eventEntity = await repository.Events.ToListAsync(cancellationToken);
-        
+        var eventEntity = await repository.Events.Include(x => x.Location).ToListAsync(cancellationToken);
+
         return new ResponseWrapper<IEnumerable<EventDto>>() { Data = eventEntity.ConvertAll(x => new EventDto(x)) };
     }
 }
