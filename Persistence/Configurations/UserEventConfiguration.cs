@@ -10,7 +10,7 @@ public class UserEventConfiguration : IEntityTypeConfiguration<UserEvent>
     {
         builder.HasKey(ue => new { ue.UserId, ue.EventId });
 
-        builder.HasOne(x=> x.User)
+        builder.HasOne(x => x.User)
             .WithMany()
             .HasForeignKey(x => x.UserId);
         

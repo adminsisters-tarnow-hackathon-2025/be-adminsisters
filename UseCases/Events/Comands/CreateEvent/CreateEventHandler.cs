@@ -19,6 +19,7 @@ public class CreateEventHandler(IRepository repository) : IRequestHandler<Create
             request.Tags,
             request.DateFrom,
             request.DateTo,
+            request.Image,
             request.LocationId
             );
         await repository.Events.AddAsync(eventEntity, cancellationToken);

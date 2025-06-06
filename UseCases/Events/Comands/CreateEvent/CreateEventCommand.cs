@@ -13,4 +13,5 @@ public record CreateEventCommand(
     List<string> Tags,
     DateTime DateFrom,
     DateTime DateTo,
+    byte[] Image,
     Guid LocationId) : IRequest<ResponseWrapper<Guid>>;

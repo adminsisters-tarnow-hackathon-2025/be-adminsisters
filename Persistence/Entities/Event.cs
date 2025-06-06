@@ -12,6 +12,7 @@ public class Event
     public List<string> Tags { get; set; } = [];
     public DateTime DateFrom { get; set; }
     public DateTime DateTo { get; set; }
+    public byte[] Image { get; set; }
     public Guid LocationId { get; set; }
     public Location? Location { get; init; }
 
@@ -25,6 +26,7 @@ public class Event
         List<string> tags,
         DateTime dateFrom,
         DateTime dateTo,
+        byte[] image,
         Guid locationId
     )
     {
@@ -39,6 +41,7 @@ public class Event
             Tags = tags,
             DateFrom = dateFrom.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(dateFrom, DateTimeKind.Utc) : dateFrom.ToUniversalTime(),
             DateTo = dateTo.Kind == DateTimeKind.Unspecified ? DateTime.SpecifyKind(dateTo, DateTimeKind.Utc) : dateTo.ToUniversalTime(),
+            Image = image,
             LocationId = locationId
         };
     }
