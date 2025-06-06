@@ -41,7 +41,7 @@ public class UsersController(IMediator mediator) : ControllerBase
         return Ok(newCoinBalance);
     }
 
-    [HttpPost]
+    [HttpPost("login")]
     public async Task<IActionResult> LoginUser([FromBody] LoginUserCommand command)
     {
         var userId = await mediator.Send(command);
