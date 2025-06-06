@@ -3,7 +3,7 @@ using MediatR;
 
 namespace be_adminsisters.UseCases.Events.Comands.CreateEvent;
 
-public record CreateEventOptions(
+public record CreateEventCommand(
     string Name,
     string ShortDescription,
     string LongDescription,
@@ -14,6 +14,4 @@ public record CreateEventOptions(
     List<string> Tags,
     DateTime DateFrom,
     DateTime DateTo,
-    Guid LocationId);
-
-public record CreateEventCommand(Guid Id, CreateEventOptions Options) : IRequest<ResponseWrapper<Guid>>;
+    Guid LocationId) : IRequest<ResponseWrapper<Guid>>;

@@ -27,16 +27,15 @@ public class EventsController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("{id:guid}")]
-    public async Task<IActionResult> CreateEvent(Guid id, CreateEventOptions options)
+    [HttpPost]
+    public async Task<IActionResult> CreateEvent([FromBody]  CreateEventCommand command)
     {
-        var command = new CreateEventCommand(id, options);
         var result = await mediator.Send(command);
         return Ok(result);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> CreateEvent(Guid id, UpdateEventOptions options)
+    public async Task<IActionResult> UpdateEvent(Guid id, UpdateEventOptions options)
     {
         var command = new UpdateEventCommand(id, options);
         await mediator.Send(command);

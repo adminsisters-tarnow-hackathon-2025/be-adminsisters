@@ -10,15 +10,15 @@ public class CreateEventHandler(IRepository repository) : IRequestHandler<Create
     public async Task<ResponseWrapper<Guid>> Handle(CreateEventCommand request, CancellationToken cancellationToken)
     {
         var eventEntity = Event.Create(
-            request.Options.Name,
-            request.Options.ShortDescription,
-            request.Options.LongDescription,
-            request.Options.Price,
-            request.Options.CoinReward,
-            request.Options.Image,
-            request.Options.DateFrom,
-            request.Options.DateTo,
-            request.Options.LocationId
+            request.Name,
+            request.ShortDescription,
+            request.LongDescription,
+            request.Price,
+            request.CoinReward,
+            request.Image,
+            request.DateFrom,
+            request.DateTo,
+            request.LocationId
             );
         await repository.Events.AddAsync(eventEntity, cancellationToken);
         await repository.SaveChangesAsync(cancellationToken);
