@@ -12,5 +12,6 @@ public class EventDto(Event eventEntity)
     public int CoinReward { get; set; } = eventEntity.CoinReward;
     public DateTime DateFrom { get; set; } = eventEntity.DateFrom;
     public DateTime DateTo { get; set; } = eventEntity.DateTo;
+    public string Type { get; set; } = eventEntity.Type;
     public EventLocationDto Location { get; set; } = new EventLocationDto(eventEntity.Location!);
 }
