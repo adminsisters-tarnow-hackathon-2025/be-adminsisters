@@ -10,7 +10,7 @@ public class User
     public string Name { get; private set; } = string.Empty;
     public string Password { get; private set; } = string.Empty;
     public int CoinAmount { get; private set; }
-
+    public bool IsAdmin { get; set; } = false;
     public List<UserEvent>? UserEvents { get; init; }
     public List<UserAchievement>? UserAchievements { get; init; }
 
